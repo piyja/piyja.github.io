@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://pjcha.github.io/sitemap.xml
+Sitemap: https://piyja.github.io/sitemap.xml
