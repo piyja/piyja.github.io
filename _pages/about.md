@@ -17,8 +17,20 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Hello there! My name is Piyush. I work as a software engineer in the automotive industry. I am currently located in Berlin and work at [Mbition](https://mbition.io/). We are involved in creating next generative infotainment platform and application services for the Mercedes-Benz car lines. 
+Hello! I’m Piyush.
 
-I have studied [Design Engineering](https://ed.iitm.ac.in/) at [IIT Madras, Chennai](https://www.iitm.ac.in/) - where I delved into few horizontal engineering verticals - electronics, computer science and mechanical. All in all to be applied upon developing products. We also had specialization courses on Automotive engineering.
+I am a Software Engineer at MBition (Mercedes-Benz Group) in Berlin, where I am building the next generation of the "Hey Mercedes" virtual assistant. My work sits at the intersection of embedded systems and cutting-edge AI, focusing on transforming how drivers interact with their vehicles.
 
-I developed liking for designing and building products through software. I am experienced in the process of designing, developing and launching software products. Furthermore, I have been working in the agile embedded SW development in automotive and consumer electronics industry. I am big fan of developing automated tests and follows test driven development. I have self-started, spearheaded various projects and have project management experience at professional level. Likewise, I am motivated to create smart, futuristic products which serves a cause of improving our life.
+My foundation is in Design Engineering from IIT Madras, a multidisciplinary background that fused electronics, computer science, and mechanical engineering. This "horizontal" expertise allows me to approach software not just as code, but as a holistic product.
+
+Currently, I am deeply invested in the evolution of Agentic AI systems. I don’t just study these architectures; I actively develop and deploy them into functional products. My goal is to move beyond simple command-response models toward proactive, intelligent agents that anticipate user needs.
+
+Core Philosophy:
+
+User-Centric Design: Every system I build starts with the end-user experience, ensuring complex AI remains intuitive and purposeful.
+
+Engineering Rigor: I am a strong advocate for Test-Driven Development (TDD) and automated testing to ensure reliability in safety-critical automotive environments.
+
+Leadership: From self-starting niche projects to spearheading professional-grade software launches, I combine technical execution with agile project management.
+
+I am driven by the challenge of creating smart, futuristic products that tangibly improve daily life.
