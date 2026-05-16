@@ -3,9 +3,21 @@ version: "3"
 services:
   jekyll:
     image: amirpourmand/al-folio:latest # jekyll/builder:latest
-    build: .
     ports:
       - 8080:8080
       - 35729:35729
+    environment:
+      - http_proxy=
+      - https_proxy=
+      - HTTP_PROXY=
+      - HTTPS_PROXY=
     volumes:
       - .:/srv/jekyll
+      - bundle_cache:/usr/local/bundle
+    command: >
+      bash -c "bundle install && bundle exec jekyll serve
+      --watch --port=8080 --host=0.0.0.0
+      --livereload --verbose --trace --force_polling"
+
+volumes:
+  bundle_cache:
