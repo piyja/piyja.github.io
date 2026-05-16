@@ -21,7 +21,7 @@ Hello! I’m Piyush.
 
 I am a Software Engineer at MBition (Mercedes-Benz Group) in Berlin, where I am building the next generation of the "Hey Mercedes" virtual assistant. My work sits at the intersection of embedded systems and cutting-edge AI, focusing on transforming how drivers interact with their vehicles.
 
-My foundation is in Design Engineering from IIT Madras, a multidisciplinary background that fused electronics, computer science, and mechanical engineering. This "horizontal" expertise allows me to approach software not just as code, but as a holistic product.
+My foundation is in Design Engineering from [IIT Madras](https://www.iitm.ac.in/), a multidisciplinary background that fused electronics, computer science, and mechanical engineering. This "horizontal" expertise allows me to approach software not just as code, but as a holistic product.
 
 Currently, I am deeply invested in the evolution of Agentic AI systems. I don’t just study these architectures; I actively develop and deploy them into functional products. My goal is to move beyond simple command-response models toward proactive, intelligent agents that anticipate user needs.
 
