@@ -121,7 +121,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: Software Engineering Blog
+blog_name: Engineering titbits
 blog_description:
 permalink: /blog/:year/:title/
 
@@ -131,7 +131,7 @@ pagination:
 
 related_blog_posts:
   enabled: true
-  max_related: 5
+  max_related: 20
 
 # Giscus comments (RECOMMENDED)
 # Follow instructions on https://giscus.app/ to setup for your repo to fill out the information below.
@@ -258,7 +258,7 @@ jekyll-archives:
     tag: "/blog/tag/:name/"
     category: "/blog/category/:name/"
 
-display_tags: ["Book-reviews", "Design", "Architecture", "C++", "Rust", "Automotive", "Security"] # these tags will be displayed on the front page of your blog
+display_tags: ["Book-reviews", "Architecture", "C++", "Automotive", "Security", "MLSystems", "MLOps", "Thoughts"] # these tags will be displayed on the front page of your blog
 display_categories: # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
