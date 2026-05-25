@@ -24,8 +24,7 @@
       "startDate": "Nov '21",
       "endDate": "Now",
       "summary": [
-        "Practicing domain expert knowledge of software development in automotive infotainment. ",
-        "Developing technologies in modern C++ with automated testing suite hooked on to the state of the art CI-CD platforms. "
+        "Product leader with a decade of experience shipping consumer and automotive products to millions of users, from defining strategy and roadmap to cross‑functional execution. Track record of translating user needs into technical vision and measurable business impact — across Dyson, Mercedes‑Benz, and early‑stage startups. Design Engineering background (IIT Madras) combined with hands‑on software depth enables bridging user experience, business goals, and technical tradeoffs."
       ]
     },
     {
@@ -46,14 +45,14 @@
       "institution": "Indian Institute of Technology Madras",
       "location": "Chennai, India",
       "url": "https://www.iitm.ac.in/",
-      "area": "Engineering Design",
+      "area": "Engineering Design - Product Development",
       "studyType": "B. Tech + M. Tech",
       "startDate": "2011",
       "endDate": "2016",
       "courses": [
-        "Eletronics",
-        "Computer science",
-        "Product development labs",
+        "Electronics",
+        "Computer Science",
+        "Product Development Labs",
         "Automotive Engineering"
       ]
     }
@@ -63,24 +62,10 @@
       "icon": "",
       "keywords": [
         "C++ 14/17/20",
+        "Edge AI engineering",
         "Software Architecture",
-        "Embedded Systems Linux",
-        "Software Design",
-        "Automotive",
-        "Agile"
+        "Embedded Systems Linux"
       ]
-    }
-  ],
-  "languages": [
-    {
-      "language": "English",
-      "fluency": "Native speaker",
-      "icon": ""
-    },
-    {
-      "language": "German",
-      "fluency": "Basic knowledge",
-      "icon": ""
     }
   ]
 }

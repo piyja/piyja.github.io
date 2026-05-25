@@ -3,3 +3,14 @@ Here is the list of topics which I wish to cover over the course of 2 weeks in M
   - Context Engineering
   - Memory management in agents
   - What is the essence of Agents in AI and how to build them - A2A protocol, MCP servers, tools, etc.
+
+I want to journal learning from my ML learning track - May + June '26
+- from ML fundamentals training 
+    - gradient decent
+    - backpropagation 
+    - activation functions
+    - loss functions
+    - optimization algorithms
+    - normalization and regularization techniques
+    - KNN nearest neighbors
+    - SVM support vector machines
