@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Inside Out of a LLM
-date: 2026-05-14
+title: WIP Inside Out of a LLM
+date: 2026-05-21
 description: In this post, we will explore the building blocks of LLM, their basic definition and how they work together to make a LLM. 
 tags: MLSystems
 categories: MLSystems

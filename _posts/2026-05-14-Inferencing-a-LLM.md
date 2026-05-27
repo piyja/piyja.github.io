@@ -62,3 +62,4 @@ I would like to divide the techniques for optimizing inference in LLMs into thre
 - Speculative decoding (TTFT reduction)
   - We use a smaller, faster model to generate multiple candidate tokens in parallel, and then use the larger, more accurate model to select the best candidate token. This can significantly reduce the time taken to generate the first token and improve overall latency.
 
+
