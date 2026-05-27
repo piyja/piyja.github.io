@@ -4,26 +4,26 @@ title: Building Agentic Applications
 date: 2026-05-16
 description: In this post, we will explore the concept of agentic applications, their design principles, and how they can be leveraged to create more autonomous and intelligent systems.
 tags: MLOps
-categories: MLOps
+categories: [Field Notes]
 chart:
   vega_lite: true
-giscus_comments: true
+giscus_comments: false
 toc:
   sidebar: left
 ---
 
-# What are agentic applications?
+# What are agentic applications? {#what-are-agentic-apps}
 
 Agentic applications are softwares which builds around AI models to utilize it as a decision making and reasoning engine along with the tools and external systems it interacts with. AI models are used as the controller to this systems that can also trigger the actions based on the data and context it receives. This enables the applications to shift away from hard coded rules and logic increasingly making them more flexible, adaptable and intelligent.
 
 Before the agentic term was coined by Andrew Ng, Lilian Weng described such application in her blog "LLM Powered Autonomous Agents" in 2023. In her blog, she describes how LLMs can be used to build autonomous agents that can perform complex tasks by breaking them down into smaller sub-tasks and delegating them to different agents or tools. Here in this blog we are building on the ideas which Lilian pitched had already picthed and have become standard to develop agentic applications today but also going to add more structure, design principles and learning from the community over this time.
 
-## Benefits of agentic applications
+## Benefits of agentic applications {#benefits}
 
 Agentic applications utilises the power of AI models more effectively. By building around the AI models, agentic applications can leverage the models' ability to learn from data and adapt to new situations, making them more flexible and adaptable than traditional applications. This allows for more complex and sophisticated applications that can handle a wider range of tasks and scenarios.
 It also allows the applications to be not hard coded and rule based anymore.
 
-## Core components of an agentic application
+## Core components of an agentic application {#core-components}
 
 Agentic applications typically consist of several core components that work together to enable the application to function autonomously. These components include:
 
@@ -63,12 +63,12 @@ Agentic applications typically consist of several core components that work toge
   irreversible action guards.
     - This is a crucial aspect of designing agentic applications, as it is important to ensure that the AI model does not take actions that could be harmful or unethical. This can be achieved through techniques such as sandboxing, where the AI model is isolated from the rest of the system and can only interact with it through a controlled interface, or through permission scopes, where the AI model is only allowed to access certain resources or perform certain actions based on predefined rules. Additionally, human-in-the-loop checkpoints can be used to allow for human oversight and intervention in critical decision-making processes.
 
-# Developing application with Multi-agent
+# Developing application with Multi-agent {#multi-agent}
 
-## Why do we need multiple agents in an application?
+## Why do we need multiple agents in an application? {#why-multi-agent}
 Inorder to maintain separation of concerns and make expert modules for different tasks, it is advices to have multiple agents in an application. This allows for better modularity, scalability and maintainability of the application. Each agent can be designed to specialize in a specific task or domain, allowing for more efficient and effective performance. Although it add challenges on the communication and task orchestration between the agents, it is a trade off worth making for the benefits it provides.
 
-## Design principles for multi-agent systems
+## Design principles for multi-agent systems {#design-principles}
 - Modularity - each agent should be designed to specialize in a specific task or domain, allowing
 for better modularity and separation of concerns
 - Communication - communicate and share information effectively to achieve the desired outcomes
@@ -76,16 +76,16 @@ for better modularity and separation of concerns
 - Scalability - scale as the number of agents and tasks increases
 - Robustness - handle failures and errors gracefully by retry/fallback/partial-pass/escalate mechanisms
 
-## Orchestration patterns for multi-agent systems
+## Orchestration patterns for multi-agent systems {#orchestration-patterns}
 
-### Decision Control Patterns
+### Decision Control Patterns {#decision-control}
 - Centralized orchestration - a single orchestrator agent manages the flow of information and tasks between the different agents in the system. This can be simpler to implement but may become a bottleneck as the number of agents increases.
 - Decentralized orchestration - each agent is responsible for managing its own tasks and communication with
 other agents. This can be more complex to implement but can provide better scalability and robustness.
 - Hybrid orchestration - a combination of centralized and decentralized orchestration, where some agents are responsible
 for managing their own tasks and communication, while others are managed by a central orchestrator. This can provide a balance between simplicity and scalability.
 
-### Flow Control Patterns
+### Flow Control Patterns {#flow-control}
 - hierarchical orchestration - agents are organized in a hierarchical structure, where higher-level agents manage the flow of information and tasks between lower-level agents. This can provide better modularity and separation of concerns but may require more complex communication and coordination between agents.
 - peer-to-peer orchestration - agents communicate and coordinate directly with each other without a central orchestr
 ator. This can provide better scalability and robustness but may require more complex communication and coordination between agents.

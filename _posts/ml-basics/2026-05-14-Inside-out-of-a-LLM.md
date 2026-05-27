@@ -3,18 +3,18 @@ layout: post
 title: Inside Out of a LLM
 date: 2026-05-14
 description: In this post, we will explore the inner workings of LLMs and how they are designed and built. Basic concepts which build LLM will be discussed here.
-tags: MLSystems
-categories: MLSystems
+tags: MLSystems, LLM
+categories: [ML Basics]
 chart:
   vega_lite: true
-giscus_comments: true
+giscus_comments: false
 toc:
   sidebar: left
 ---
 
 Following article is from my notes while learning on how LLMs work and what happens inside a LLM when we infer them. The resources I used to learn about LLMs are listed throughout [the repo myMLStudy](https://github.com/piyja/myMLStudy).
 
-## The full forward pass (one layer, one token)
+## The full forward pass (one layer, one token) {#forward-pass}
 
 The user input is first tokenized and converted into token vectors. Each token vector is then processed through a transformer decoder layer, which transforms it into an enriched output vector by incorporating information from previous tokens through attention and applying non-linear transformations via feed-forward networks. Here's a step-by-step breakdown of the forward pass for one token through one layer:
 
@@ -47,7 +47,7 @@ logits = x @ Wcls          → (vocab_size,)
 next_token = sample(logits)
 ```
 
-## Embracing Q, K, V — why do we have three vectors?
+## Embracing Q, K, V — why do we have three vectors? {#qkv}
 
 Each token projects into three separate vectors via learned matrices `Wq`, `Wk`, `Wv`:
 
@@ -60,20 +60,20 @@ Each token projects into three separate vectors via learned matrices `Wq`, `Wk`,
 **Why not one vector?** A token's ability to ask questions (Q) and its ability to answer others (K) are different learned behaviors. V is even more separate — it carries the actual content that flows into the output, independent of how attention scores are computed.
 
 
-## Multi-Head Attention — why multiple heads?
+## Multi-Head Attention — why multiple heads? {#multi-head-attention}
 
 A single large head can only learn one way to measure relevance. Multiple smaller heads learn different relationship types in parallel. Outputs are concatenated and projected via `Wo`.
 
 N heads each have their own `Wq`, `Wk`, `Wv`. Each head learns to specialize in a different type of relationship.
 
-### Backpropagation and training — how do LLMs learn from data?
+### Backpropagation and training — how do LLMs learn from data? {#backpropagation}
 
 1. Runs forward pass, compute loss (how wrong the output is)
 2. Chain rule backwards: at each layer, multiply incoming gradient by local derivative
 3. Each weight gets a gradient: does increasing this weight increase or decrease the loss?
 4. Update: `w = w - learning_rate × gradient`
 
-## Residual connections — why add the input back to the output?
+## Residual connections — why add the input back to the output? {#residual-connections}
 
 Each layer only needs to learn a *delta* (what to add), not rewrite the full vector. The original signal flows through untouched.
 A borrowed analogy: think of a birthday card, the card itself is the input, and the message inside is the delta. The card can be passed through many layers of people adding their own messages without losing the original card. The residual connection allows the original input to be preserved while allowing each layer to add its own contribution. The reason behind the backpropagating of the gradients is that if any layer's derivative < 1, repeated multiplication shrinks the gradient to ~0 quickly making the initial layers not learn effectively. Residuals solve this by providing a gradient highway.
@@ -96,7 +96,7 @@ The `1` is a gradient highway — even if `d(F)/d(x₀)` shrinks to zero, gradie
 | Early training chaos | Weight initialization |
 | Step size | Learning rate + scheduler |
 
-## Layer normalization — why normalize the input to each block?
+## Layer normalization — why normalize the input to each block? {#layer-normalization}
 
 Applied *before* each attention block and each FFN block (pre-norm):
 
@@ -110,7 +110,7 @@ out = learned_weights * x̂
 
 **Why learned re-scale weights:** normalization destroys scale information. The model learns per-dimension weights to recover the scales that matter for each layer. Without them, normalization would be purely static.
 
-## Feed forward networks — why have a separate feed forward network after attention? not just activation functions
+## Feed forward networks — why have a separate feed forward network after attention? not just activation functions {#ffn}
 
 After attention mixes *which* tokens communicate, FFN decides *what to think* about that mixture:
 
@@ -126,7 +126,7 @@ FFN layers behave like **key-value memories** — neurons in the hidden layer fi
 Attention = routing (who talks to whom).
 FFN = storage (what facts are applied).
 
-## KV Cache — how do transformers efficiently handle long contexts during inference?
+## KV Cache — how do transformers efficiently handle long contexts during inference? {#kv-cache}
 
 During generation, every new token needs to attend to all previous tokens. Without cache: recompute K and V for all previous tokens every step — O(N²) recomputation.
 
@@ -148,7 +148,7 @@ For Llama-7B, seq_len=4096: ~1GB just for KV cache.
 
 **Prompt processing:** the model runs a full forward pass on every prompt token to populate the KV cache, even though it forces the known next token and ignores the logits.
 
-## Encoder vs Decoder vs Encoder-Decoder models — what are the differences and use cases for each architecture?
+## Encoder vs Decoder vs Encoder-Decoder models — what are the differences and use cases for each architecture? {#architectures}
 
 Encoder - only models (BERT) use bidirectional attention and are trained with masked language modeling (MLM) objectives, making them ideal for understanding tasks like classification and embeddings.
 

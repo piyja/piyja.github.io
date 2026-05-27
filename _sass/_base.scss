@@ -2,6 +2,34 @@
  * Styles for the base elements of the theme.
  ******************************************************************************/
 
+// Heading anchor links
+.heading-anchor {
+  opacity: 0;
+  margin-left: 0.4em;
+  font-size: 0.75em;
+  color: var(--global-text-color-light, #aaa);
+  text-decoration: none;
+  vertical-align: middle;
+  transition: opacity 0.15s ease;
+  user-select: none;
+
+  &:hover {
+    color: var(--global-theme-color);
+    text-decoration: none;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  &:hover .heading-anchor {
+    opacity: 1;
+  }
+}
+
+.heading-anchor-copied {
+  opacity: 1 !important;
+  color: var(--global-theme-color) !important;
+}
+
 // Typography
 
 p,

@@ -18,27 +18,10 @@ nav_order: 1
   </div>
 {% endif %}
 
-{% if site.display_tags or site.display_categories %}
-  <div class="tag-category-list">
-    <ul class="p-0 m-0">
-      {% for tag in site.display_tags %}
-        <li>
-          <i class="fa-solid fa-hashtag fa-sm"></i> <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">{{ tag }}</a>
-        </li>
-        {% unless forloop.last %}<p>&bull;</p>{% endunless %}
-      {% endfor %}
-      {% if site.display_categories.size > 0 and site.display_tags.size > 0 %}
-        <p>&bull;</p>
-      {% endif %}
-      {% for category in site.display_categories %}
-        <li>
-          <i class="fa-solid fa-tag fa-sm"></i> <a href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}">{{ category }}</a>
-        </li>
-        {% unless forloop.last %}<p>&bull;</p>{% endunless %}
-      {% endfor %}
-    </ul>
-  </div>
-{% endif %}
+<div class="tab-nav-ml" id="blog-tabs">
+  <a href="#" class="tab-link active-tab" data-tab="my-titbits">Field Notes</a>
+  <a href="#" class="tab-link" data-tab="ml-basics">ML Basics</a>
+</div>
 
 {% assign featured_posts = site.posts | where: "featured", "true" %}
 {% if featured_posts.size > 0 %}
@@ -80,12 +63,12 @@ nav_order: 1
 <hr>
 {% endif %}
 
-{% assign postlist = site.posts %}
+<!-- Field Notes Tab -->
+<div id="tab-my-titbits" class="tab-content">
+{% assign titbits_posts = site.posts | where_exp: "post", "post.categories contains 'Field Notes'" %}
 {% assign current_month_year = "" %}
-
-{% for post in postlist %}
+{% for post in titbits_posts %}
   {% assign post_month_year = post.date | date: "%B %Y" %}
-
   {% if post_month_year != current_month_year %}
     {% unless forloop.first %}</ul>{% endunless %}
     <h4 class="mt-4 mb-2" style="border-bottom: 1px solid var(--global-divider-color); padding-bottom: 0.3rem;">
@@ -94,7 +77,6 @@ nav_order: 1
     <ul class="post-list">
     {% assign current_month_year = post_month_year %}
   {% endif %}
-
   {% if post.external_source == blank %}
     {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
   {% else %}
@@ -103,13 +85,8 @@ nav_order: 1
   {% assign year = post.date | date: "%Y" %}
   {% assign tags = post.tags | join: "" %}
   {% assign categories = post.categories | join: "" %}
-
   <li>
-    {% if post.thumbnail %}
-    <div class="row">
-      <div class="col-sm-9">
-    {% endif %}
-
+    {% if post.thumbnail %}<div class="row"><div class="col-sm-9">{% endif %}
     <h3>
       {% if post.redirect == blank %}
         <a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
@@ -147,7 +124,6 @@ nav_order: 1
         {% endfor %}
       {% endif %}
     </p>
-
     {% if post.thumbnail %}
       </div>
       <div class="col-sm-3">
@@ -156,8 +132,100 @@ nav_order: 1
     </div>
     {% endif %}
   </li>
-
 {% endfor %}
-</ul>
+{% if titbits_posts.size > 0 %}</ul>{% endif %}
+{% if titbits_posts.size == 0 %}<p class="text-muted mt-3">No posts yet. Stay tuned!</p>{% endif %}
+</div>
+
+<!-- ML Basics Tab -->
+<div id="tab-ml-basics" class="tab-content" style="display:none;">
+{% assign ml_posts = site.posts | where_exp: "post", "post.categories contains 'ML Basics'" %}
+{% assign current_month_year = "" %}
+{% for post in ml_posts %}
+  {% assign post_month_year = post.date | date: "%B %Y" %}
+  {% if post_month_year != current_month_year %}
+    {% unless forloop.first %}</ul>{% endunless %}
+    <h4 class="mt-4 mb-2" style="border-bottom: 1px solid var(--global-divider-color); padding-bottom: 0.3rem;">
+      <i class="fa-solid fa-calendar-days fa-sm"></i> &nbsp; {{ post_month_year }}
+    </h4>
+    <ul class="post-list">
+    {% assign current_month_year = post_month_year %}
+  {% endif %}
+  {% if post.external_source == blank %}
+    {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
+  {% else %}
+    {% assign read_time = post.feed_content | strip_html | number_of_words | divided_by: 180 | plus: 1 %}
+  {% endif %}
+  {% assign year = post.date | date: "%Y" %}
+  {% assign tags = post.tags | join: "" %}
+  {% assign categories = post.categories | join: "" %}
+  <li>
+    {% if post.thumbnail %}<div class="row"><div class="col-sm-9">{% endif %}
+    <h3>
+      {% if post.redirect == blank %}
+        <a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      {% elsif post.redirect contains '://' %}
+        <a class="post-title" href="{{ post.redirect }}" target="_blank">{{ post.title }}</a>
+        <svg width="2rem" height="2rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      {% else %}
+        <a class="post-title" href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
+      {% endif %}
+    </h3>
+    <p>{{ post.description }}</p>
+    <p class="post-meta">
+      {{ read_time }} min read &nbsp; &middot; &nbsp;
+      {{ post.date | date: '%B %d, %Y' }}
+      {% if post.external_source %}&nbsp; &middot; &nbsp; {{ post.external_source }}{% endif %}
+    </p>
+    <p class="post-tags">
+      <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}">
+        <i class="fa-solid fa-calendar fa-sm"></i> {{ year }}
+      </a>
+      {% if tags != "" %}
+        &nbsp; &middot; &nbsp;
+        {% for tag in post.tags %}
+          <a href="{{ tag | slugify | prepend: '/blog/tag/' | prepend: site.baseurl}}">
+            <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}</a> &nbsp;
+        {% endfor %}
+      {% endif %}
+      {% if categories != "" %}
+        &nbsp; &middot; &nbsp;
+        {% for category in post.categories %}
+          <a href="{{ category | slugify | prepend: '/blog/category/' | prepend: site.baseurl}}">
+            <i class="fa-solid fa-tag fa-sm"></i> {{ category }}</a> &nbsp;
+        {% endfor %}
+      {% endif %}
+    </p>
+    {% if post.thumbnail %}
+      </div>
+      <div class="col-sm-3">
+        <img class="card-img" src="{{post.thumbnail | relative_url}}" style="object-fit: cover; height: 90%" alt="image">
+      </div>
+    </div>
+    {% endif %}
+  </li>
+{% endfor %}
+{% if ml_posts.size > 0 %}</ul>{% endif %}
+{% if ml_posts.size == 0 %}<p class="text-muted mt-3">No posts yet. Stay tuned!</p>{% endif %}
+</div>
 
 </div>
+
+{% include subscribe.liquid %}
+
+<script>
+(function() {
+  var tabs = document.querySelectorAll('.tab-link');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function(e) {
+      e.preventDefault();
+      tabs.forEach(function(t) { t.classList.remove('active-tab'); });
+      document.querySelectorAll('.tab-content').forEach(function(c) { c.style.display = 'none'; });
+      tab.classList.add('active-tab');
+      document.getElementById('tab-' + tab.dataset.tab).style.display = 'block';
+    });
+  });
+})();
+</script>

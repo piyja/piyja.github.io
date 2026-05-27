@@ -1,4 +1,26 @@
+// Inject anchor link icons into all headings that have an id
+function initHeadingAnchors() {
+  document.querySelectorAll("#markdown-content h1[id], #markdown-content h2[id], #markdown-content h3[id], #markdown-content h4[id], #markdown-content h5[id], #markdown-content h6[id]").forEach(function (heading) {
+    var anchor = document.createElement("a");
+    anchor.className = "heading-anchor";
+    anchor.href = "#" + heading.id;
+    anchor.setAttribute("aria-label", "Link to this section");
+    anchor.innerHTML = '<i class="fa-solid fa-link fa-xs"></i>';
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      var url = window.location.origin + window.location.pathname + "#" + heading.id;
+      navigator.clipboard.writeText(url).then(function () {
+        anchor.classList.add("heading-anchor-copied");
+        setTimeout(function () { anchor.classList.remove("heading-anchor-copied"); }, 1500);
+      });
+      history.pushState(null, null, "#" + heading.id);
+    });
+    heading.appendChild(anchor);
+  });
+}
+
 $(document).ready(function () {
+  initHeadingAnchors();
   // add toggle functionality to abstract and bibtex buttons
   $("a.abstract").click(function () {
     $(this).parent().parent().find(".abstract.hidden").toggleClass("open");

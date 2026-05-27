@@ -18,3 +18,101 @@ $max-content-width: {{ site.max_width }};
   "font-awesome/solid",
   "font-awesome/regular"
 ;
+
+// Blog Tab Navigation
+.tab-nav-ml {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+  margin-top: 0.25rem;
+  border-bottom: 2px solid var(--global-divider-color);
+}
+
+.tab-nav-ml a {
+  padding: 0.45rem 1.1rem;
+  text-decoration: none;
+  color: var(--global-text-color-light);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: transparent;
+  position: relative;
+  bottom: -2px;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.tab-nav-ml a:hover {
+  color: var(--global-text-color);
+  background: var(--global-hover-color);
+  text-decoration: none;
+}
+
+.tab-nav-ml a.active-tab {
+  color: var(--global-theme-color);
+  font-weight: 600;
+  background: var(--global-bg-color);
+  border-color: var(--global-divider-color);
+  border-bottom-color: var(--global-bg-color);
+}
+
+// Subscribe section
+.subscribe-section {
+  margin-top: 3rem;
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 8px;
+  background: var(--global-card-bg-color);
+
+  h4 {
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+  }
+
+  p {
+    color: var(--global-text-color-light);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.subscribe-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  input[type="email"] {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 6px;
+    background: var(--global-bg-color);
+    color: var(--global-text-color);
+    font-size: 0.9rem;
+
+    &:focus {
+      outline: none;
+      border-color: var(--global-theme-color);
+    }
+  }
+
+  button {
+    padding: 0.45rem 1.25rem;
+    border: none;
+    border-radius: 6px;
+    background: var(--global-theme-color);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}

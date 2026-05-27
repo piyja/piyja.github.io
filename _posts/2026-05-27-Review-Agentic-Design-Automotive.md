@@ -1,21 +1,22 @@
 ---
 layout: post
-title: Review of Agentic Design in Automotive
+title: Review of Nvidia's article on Agentic Design for Automotive
 date: 2026-05-27
 description: 
 tags: MLOps, MLSystems
+categories: [Field Notes]
 chart:
   vega_lite: true
-giscus_comments: true
+giscus_comments: false
 toc:
   sidebar: left
 ---
 
-## Article review - [How to Build In-Vehicle AI Agents with NVIDIA: From Cloud to Car](https://developer.nvidia.com/blog/how-to-build-in-vehicle-ai-agents-with-nvidia-from-cloud-to-car/)
+## About the article - [How to Build In-Vehicle AI Agents with NVIDIA: From Cloud to Car](https://developer.nvidia.com/blog/how-to-build-in-vehicle-ai-agents-with-nvidia-from-cloud-to-car/) {#about}
 
 Nvidia's DRIVE team recently published a blog post on developing in-vehicle edge AI agents. I wanted to share my notes on it here and add further thoughts about the critical focus areas from the lens of product strategy and user requirements. Since I am working in the automotive domain, I find it important to keep an eye on the developments in the industry and also to understand how the big players are thinking about the future of in-vehicle AI agents. We can hinge our product development on these key evaluation parameters and critical focus areas and develop a reliable and robust agentic AI systems.
 
-### Arguments made in the article - a quick analysis 
+### Arguments made in the article - a quick analysis {#arguments}
 
 1. As building AI models powered applications is becoming common we are shifting away from hard Rule-based programming and entering new phase in which we make use of the AI powered Agents, the so called agentic AI shift. As fixed command-response doesn't scale well; LLMs/VLMs enable conversational AI with memory, reasoning, and proactive assistance.   
 2. Although to get reliable output AI model requires a good amount of hardware acceleration. Real-time AI at the edge can be hard — if you have need to run 7B+ param models locally, preferably for multimodal use case. Importantly it also requires rethinking of the memory budget and not just the compute budget. The in cabin edge computation would require tight SLO/SLA of 400-500ms response time, >30 tokens/sec, multimodal inputs (camera + audio + telemetry), all while preserving privacy of the users.
@@ -30,7 +31,7 @@ Nvidia's DRIVE team recently published a blog post on developing in-vehicle edge
     * DRIVE AGX Thor taking the above solution further by utlizing blackwell GPUs serving a platform for AI workload for the whole vehicle
     * A single central car computer fused with DRIVE AGX fused with the MediaTek Dimensity AX SoC - a fully integrated solution for infotainment and AI workloads, but would require more commitment to the new hardware architecture. Will have a great upside that latency for data communication will be the lowest but then again it would require a full redesign of the E/E architecture and software stack.
 
-### Critical focus areas for building in-vehicle AI agents
+### Critical focus areas for building in-vehicle AI agents {#critical-focus-areas}
 
 1. **Specialised models for the voice pipeline** — 
     The 500ms-700ms end-to-end SLA is a budget distributed across every stage of the pipeline. Each arrow in `Wake Word → ASR → Orchestrator → LLM → TTS → Audio Output` carries a latency cost, leaving roughly 150ms per stage — which immediately constrains model size and quantization decisions at every step.
@@ -65,7 +66,7 @@ Nvidia's DRIVE team recently published a blog post on developing in-vehicle edge
     Agentic setup offers means to highly personalise the setup as per the user and continuously improve the agents - dedicated pipelines can be designed to receive and store feedback from the user, handle errors, and continuous improvement of the agent's performance in real-world conditions.
    
 
-### Closing points:
+### Closing points {#closing}
 
   Navigating this moving landscape of AI engineering and taking steps to create platform for building and iterating on AI agents in the future can be tough. 
   But with wholistic design thinking and a user-product centric approach we can build system ready for the future. Finally the onus is on the decision making step - on deciding what to build!

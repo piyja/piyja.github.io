@@ -4,14 +4,14 @@ title:
 date: 2024-01-11 00:20:00
 description: Book-review for C++ Design pattern – Klaus Iglberger
 tags: Design, Book-reviews, C++
-categories: Design books
+categories: [Field Notes]
 chart:
   vega_lite: true
-giscus_comments: true
+giscus_comments: false
 toc:
   sidebar: left
 ---
-# About the book
+# About the book {#about}
 
 Recently I got an opportunity to read C++ Software Design by Dr Klaus Iglberger. I find the concepts presented in the book if not to cover basics but quite intriguing to further the thought process. As a software developer, I do regularly of think of design patterns and use them aiming to make the codebase more modular, scalable, reusable, less coupled. Albeit I found a holistic view of the design patterns from this book and would recommend it to a seasoned software developer. In this post, I am aiming to give a summary of the book but it is not a promotional blog by any means. You can treat it as a nonexhaustive abstract of what the book covers but if you are intrigued more please dive into the book.
 
@@ -19,7 +19,7 @@ The book is about 400 pages and is divided into 39 digestible guidelines. In my 
 
 Alright, let's dive in. Following are the sections giving the summary of the book.
 
-# [1/3] Basic Software Development principles and what they mean from architectural pov
+# [1/3] Basic Software Development principles and what they mean from architectural pov {#part-1}
 
 In this first part of the book, the author introduces both what software design is and why it is important in any software project. If we go to the first principle it is nothing but the "Art of managing dependencies and abstraction". The author represents software development in three levels of 
 
@@ -42,7 +42,7 @@ Naming design patterns with commonly known patterns helps to pass on intent and 
 
 The open-for-extension guideline in OCP can be interpreted in two ways: open for extending types or open for extending operations. Procedural programming gives us ease of adding new code for extending the operations but gets tougher to add new polymorphic types. On the other hand with OOP, we get the ease of adding new polymorphic types but it is tougher or impossible for adding new operations without recompiling the base classes. In the early stage of the project, one must make a conscious decision about which path of extension he/she wants to follow. It is important to understand that no design fits all-purpose and has its advantages and disadvantages.
 
-# [2/3] Strategy pattern, Observer and CRTP
+# [2/3] Strategy pattern, Observer and CRTP {#part-2}
 Slowly the the design topics starts getting a bit complex.
 
 From the second tierce of the book, we start to get into various design patterns of both structural and behavioral patterns. First, we cover the visitor pattern and embrace it to solve our problems with the extension of operation in the inheritance hierarchy using double dispatch. Although naturally with this approach it gets tougher to add new types. We also learn that since we have double indirections used this design becomes quite inefficient by design. Next author introduces the std::variant style of visitor pattern, with which creating abstraction becomes quite easy. With std::variant we can group any unrelated types and based on the the type present at the call we can perform operations accordingly with the help of std::visit(). The new operations logic can be added on top without going back and changing any of these classes. While looking at the benchmarked result, it is worth mentioning that there are further nuances of these of writing your own get_if() functions to call particular operations based on the type provided. Refer the book to see various interesting benchmarks reported by the author.
@@ -53,7 +53,7 @@ We investigate the command design pattern next, which looks very similar and has
 Next, we go through the Adaptor pattern, the Observer pattern, and the CRTP pattern. Adaptor patterns are used to standardize the interfaces or to introduce a shim layer between the client and implementation details. Adaptors can be formed through creating an intermediate class or even by functions. Observer pattern is used where we require a notification system for a state change of the data, we are interested in. It creates a one-to-many relation between the subject (data we are interested in) and the observers. It is good to be aware of the further niche of this design: push observer and pull observer. It is also important to highlight that the observer pattern can be attained via value semantics as well.
 The CRTP pattern creates a compile-time abstraction for a family of related types. This is attained by using templates of the derived type, where we static cast this pointer to the derived class and access the methods we want to call. Note here since we use a template for the base class, we do not have the same base class for all derived types. C++20 concepts help us to implement this pattern.
 
-# [3/3] Bridge, prototype and type erasure pattern
+# [3/3] Bridge, prototype and type erasure pattern {#part-3}
 
 The final third part of the book contains few of the most complex design patterns. If I were to go back referring to this book it would be mostly for this part of the book. The bridge pattern (belongs to the structural pattern domain ) can be used to isolate different concerns and bridge them. We can remove direct physical dependency between modules so that either end can evolve without affecting others (like retriggering recompilation etc.). The Pimpl Idiom is a more famous part of the bridge pattern. We can achieve ABI stability with this pattern. If we introduce more abstraction layers (and more indirections) it may appear that the efficiency could take a toll, which is true in most of the cases, but refer to the book to see where it can be even better than the unaltered design.
 
@@ -66,7 +66,7 @@ Decorator pattern allows dynamically attaching new functionality to the existing
 
 I hope you enjoyed reading this summarisation and find it helpful. If you decide to read the book do enjoy it! If you have already read the book, let me know if you have something more to add.
 
-# Abbreviations:
+# Abbreviations {#abbreviations}
 
 *	OOP: Object Oriented Programming
 *	DRY: Do Not Repeat yourself
