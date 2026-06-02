@@ -11,3 +11,6 @@ My ML learning track - May + June '26
     - normalization and regularization techniques
     - KNN nearest neighbors
     - SVM support vector machines
+
+
+add graph notes with obsidian-logsec into here 
