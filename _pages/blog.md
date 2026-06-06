@@ -4,6 +4,7 @@ permalink: /blog/
 title: blog
 nav: true
 nav_order: 1
+knowledge_graph: true
 ---
 
 <div class="post">
@@ -21,6 +22,8 @@ nav_order: 1
 <div class="tab-nav-ml" id="blog-tabs">
   <a href="#" class="tab-link active-tab" data-tab="my-titbits">Field Notes</a>
   <a href="#" class="tab-link" data-tab="ml-basics">ML Basics</a>
+  <a href="#" class="tab-link" data-tab="study-notes">Study Notes</a>
+  <a href="#" class="tab-link tab-right" data-tab="graph-view">Graph view</a>
 </div>
 
 {% assign featured_posts = site.posts | where: "featured", "true" %}
@@ -211,6 +214,67 @@ nav_order: 1
 {% if ml_posts.size == 0 %}<p class="text-muted mt-3">No posts yet. Stay tuned!</p>{% endif %}
 </div>
 
+<!-- Study Notes Tab -->
+<div id="tab-study-notes" class="tab-content" style="display:none;">
+{% assign study_by_category = site.study_notes | group_by: "category" %}
+{% for group in study_by_category %}
+  <h4 class="mt-4 mb-2" style="border-bottom: 1px solid var(--global-divider-color); padding-bottom: 0.3rem;">
+    <i class="fa-solid fa-folder-open fa-sm"></i> &nbsp; {{ group.name | default: "General" }}
+  </h4>
+  <ul class="post-list">
+  {% for note in group.items %}
+    {% assign read_time = note.content | number_of_words | divided_by: 180 | plus: 1 %}
+    <li>
+      <h3><a class="post-title" href="{{ note.url | relative_url }}">{{ note.title }}</a></h3>
+      {% if note.description %}<p>{{ note.description }}</p>{% endif %}
+      <p class="post-meta">
+        {{ read_time }} min read
+        {% if note.tags %}
+          &nbsp; &middot; &nbsp;
+          {% for tag in note.tags %}
+            <span style="font-size:0.8rem; color:var(--global-text-color-light);">#{{ tag }}</span> &nbsp;
+          {% endfor %}
+        {% endif %}
+      </p>
+    </li>
+  {% endfor %}
+  </ul>
+{% endfor %}
+{% if site.study_notes.size == 0 %}<p class="text-muted mt-3">No study notes yet.</p>{% endif %}
+</div>
+
+<!-- Graph View Tab -->
+<div id="tab-graph-view" class="tab-content" style="display:none;">
+  <p class="graph-subtitle" style="color:var(--global-text-color-light);font-size:0.9rem;margin-bottom:0.5rem;">
+    All posts and study notes as a connected graph. Click a node to read it.
+    <span class="kg-legend">
+      <svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="#7c6af7"/></svg> note &nbsp;
+      <svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="none" stroke="#f06292" stroke-width="2" stroke-dasharray="3,1.5"/></svg> post &nbsp;
+      <svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="none" stroke="#ff8a65" stroke-width="2.5" stroke-dasharray="5,2"/></svg> study
+    </span>
+  </p>
+  <div class="graph-controls">
+    <input type="text" id="graph-search" placeholder="Search nodes…" autocomplete="off" />
+    <div class="graph-zoom-btns">
+      <button id="zoom-in" title="Zoom in">+</button>
+      <button id="zoom-reset" title="Reset view">⊙</button>
+      <button id="zoom-out" title="Zoom out">−</button>
+    </div>
+  </div>
+  <div id="knowledge-graph"></div>
+  <div id="note-panel" class="note-panel">
+    <div class="note-panel-header">
+      <span id="note-panel-title"></span>
+      <button id="note-panel-close" title="Close">✕</button>
+    </div>
+    <div id="note-panel-tags"></div>
+    <div id="note-panel-body"></div>
+    <div class="note-panel-footer">
+      <a id="note-panel-link" href="#" target="_self">Open full page →</a>
+    </div>
+  </div>
+</div>
+
 </div>
 
 {% include subscribe.liquid %}
@@ -224,7 +288,11 @@ nav_order: 1
       tabs.forEach(function(t) { t.classList.remove('active-tab'); });
       document.querySelectorAll('.tab-content').forEach(function(c) { c.style.display = 'none'; });
       tab.classList.add('active-tab');
-      document.getElementById('tab-' + tab.dataset.tab).style.display = 'block';
+      var target = document.getElementById('tab-' + tab.dataset.tab);
+      target.style.display = 'block';
+      if (tab.dataset.tab === 'graph-view' && window.__kgInit) {
+        window.__kgInit();
+      }
     });
   });
 })();

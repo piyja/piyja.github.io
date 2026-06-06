@@ -1,5 +1,5 @@
 My blog post topics:
-  - 
+  - Port study obsidian files to here 
 
 My ML learning track - May + June '26
 - from ML fundamentals training 

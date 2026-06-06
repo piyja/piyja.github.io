@@ -157,6 +157,12 @@ disqus_shortname: # put your disqus shortname
 # -----------------------------------------------------------------------------
 
 collections:
+  notes:
+    output: true
+    permalink: /notes/:slug/
+  study_notes:
+    output: true
+    permalink: /study-notes/:path/
 
 announcements:
   enabled: false
@@ -226,6 +232,16 @@ plugins:
 
 # Sitemap settings
 defaults:
+  - scope:
+      path: ""
+      type: "notes"
+    values:
+      layout: note
+  - scope:
+      path: ""
+      type: "study_notes"
+    values:
+      layout: post
   - scope:
       path: "assets"
     values:

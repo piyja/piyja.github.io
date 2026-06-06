@@ -1,0 +1,36 @@
+---
+layout: default
+---
+<div class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.description %}
+      <p class="post-description">{{ page.description }}</p>
+    {% endif %}
+    {% if page.tags %}
+      <div class="note-tags mb-2">
+        {% for tag in page.tags %}
+          <span class="badge badge-pill" style="background:var(--global-theme-color);color:#fff;margin-right:4px;">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if page.links %}
+      <div class="note-links mt-1 mb-3">
+        <small><strong>Connected notes:</strong>
+          {% for link_slug in page.links %}
+            {% assign linked_note = site.notes | where: "slug", link_slug | first %}
+            {% if linked_note %}
+              <a href="{{ linked_note.url | relative_url }}">{{ linked_note.title }}</a>{% unless forloop.last %}, {% endunless %}
+            {% endif %}
+          {% endfor %}
+        </small>
+      </div>
+    {% endif %}
+    <p class="post-meta">
+      <a href="{{ '/graph/' | relative_url }}">← Back to graph</a>
+    </p>
+  </header>
+  <article class="post-content">
+    {{ content }}
+  </article>
+</div>

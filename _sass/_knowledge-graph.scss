@@ -1,0 +1,236 @@
+// ── Knowledge Graph Page ─────────────────────────────────────────────────────
+
+.graph-page {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.graph-header {
+  margin-bottom: 1.25rem;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .graph-subtitle {
+    color: var(--global-text-color-light);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+.kg-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--global-text-color-light);
+
+  svg { vertical-align: middle; }
+}
+
+.graph-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+
+  #graph-search {
+    flex: 1;
+    min-width: 180px;
+    max-width: 300px;
+    padding: 0.38rem 0.75rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 6px;
+    background: var(--global-bg-color);
+    color: var(--global-text-color);
+    font-size: 0.875rem;
+
+    &:focus {
+      outline: none;
+      border-color: var(--global-theme-color);
+    }
+
+    &::placeholder {
+      color: var(--global-text-color-light);
+    }
+  }
+
+  .graph-zoom-btns {
+    display: flex;
+    gap: 0.35rem;
+
+    button {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--global-divider-color);
+      border-radius: 6px;
+      background: var(--global-bg-color);
+      color: var(--global-text-color);
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+
+      &:hover {
+        background: var(--global-hover-color);
+        border-color: var(--global-theme-color);
+      }
+    }
+  }
+}
+
+#knowledge-graph {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--global-divider-color);
+
+  svg {
+    display: block;
+  }
+}
+
+// ── Note side panel ───────────────────────────────────────────────────────────
+
+.note-panel {
+  position: fixed;
+  top: 70px;
+  right: -420px;
+  width: 400px;
+  max-width: 95vw;
+  height: calc(100vh - 80px);
+  background: var(--global-bg-color);
+  border-left: 1px solid var(--global-divider-color);
+  border-top: 1px solid var(--global-divider-color);
+  border-radius: 12px 0 0 12px;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+  overflow: hidden;
+
+  &.open {
+    right: 0;
+  }
+}
+
+.note-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.1rem 0.75rem;
+  border-bottom: 1px solid var(--global-divider-color);
+  gap: 0.5rem;
+
+  #note-panel-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--global-text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #note-panel-close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--global-text-color-light);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    line-height: 1;
+
+    &:hover {
+      color: var(--global-text-color);
+      background: var(--global-hover-color);
+    }
+  }
+}
+
+#note-panel-tags {
+  padding: 0.5rem 1.1rem 0;
+
+  .kg-tag {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    font-size: 0.72rem;
+    border-radius: 12px;
+    background: var(--global-theme-color);
+    color: #fff;
+    margin-right: 4px;
+    margin-bottom: 4px;
+  }
+}
+
+#note-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem 1.1rem;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--global-text-color);
+
+  .kg-description {
+    color: var(--global-text-color-light);
+    font-style: italic;
+    margin-bottom: 0.75rem;
+  }
+
+  .kg-loading {
+    color: var(--global-text-color-light);
+  }
+
+  h1, h2, h3 { font-size: 1rem; margin-top: 1rem; margin-bottom: 0.4rem; }
+  h1 { font-size: 1.1rem; }
+  p { margin-bottom: 0.6rem; }
+  ul, ol { padding-left: 1.2rem; margin-bottom: 0.6rem; }
+  code { font-size: 0.8rem; }
+  table { font-size: 0.8rem; width: 100%; }
+  th, td { padding: 0.3rem 0.5rem; border: 1px solid var(--global-divider-color); }
+  pre { font-size: 0.78rem; overflow-x: auto; }
+  blockquote { border-left: 3px solid var(--global-theme-color); padding-left: 0.75rem; color: var(--global-text-color-light); }
+}
+
+.note-panel-footer {
+  padding: 0.6rem 1.1rem;
+  border-top: 1px solid var(--global-divider-color);
+  text-align: right;
+
+  a {
+    font-size: 0.85rem;
+    color: var(--global-theme-color);
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
+// Dark mode overrides
+html[data-theme="dark"] {
+  #knowledge-graph {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .note-panel {
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+// Mobile
+@media (max-width: 600px) {
+  .note-panel {
+    width: 100vw;
+    right: -100vw;
+    border-radius: 0;
+    top: 60px;
+    height: calc(100vh - 60px);
+  }
+}

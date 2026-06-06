@@ -1,0 +1,68 @@
+---
+---
+{% assign all_nodes = site.notes | concat: site.posts | concat: site.study_notes %}
+{
+  "nodes": [
+    {% for item in all_nodes %}
+    {% if item.slug %}
+    {
+      "id": "{{ item.slug }}",
+      "title": {{ item.title | jsonify }},
+      "description": {{ item.description | default: "" | jsonify }},
+      "url": "{{ item.url | relative_url }}",
+      "tags": {{ item.tags | default: "" | jsonify }},
+      "group": {{ item.group | default: "default" | jsonify }},
+      "wordCount": {{ item.content | number_of_words }},
+      "rawContent": {{ item.content | strip_html | jsonify }},
+      "kind": "note"
+    }{% unless forloop.last %},{% endunless %}
+    {% elsif item.categories %}
+    {
+      "id": {{ item.url | jsonify }},
+      "title": {{ item.title | jsonify }},
+      "description": {{ item.description | default: "" | jsonify }},
+      "url": "{{ item.url | relative_url }}",
+      "tags": {{ item.tags | jsonify }},
+      "group": {{ item.categories | first | default: "Field Notes" | jsonify }},
+      "wordCount": {{ item.content | number_of_words }},
+      "rawContent": {{ item.content | strip_html | truncatewords: 400 | jsonify }},
+      "kind": "post"
+    }{% unless forloop.last %},{% endunless %}
+    {% else %}
+    {
+      "id": {{ item.url | jsonify }},
+      "title": {{ item.title | jsonify }},
+      "description": {{ item.description | default: "" | jsonify }},
+      "url": "{{ item.url | relative_url }}",
+      "tags": {{ item.tags | default: "" | jsonify }},
+      "group": {{ item.category | default: "Study Notes" | jsonify }},
+      "wordCount": {{ item.content | number_of_words }},
+      "rawContent": {{ item.content | strip_html | truncatewords: 400 | jsonify }},
+      "kind": "study"
+    }{% unless forloop.last %},{% endunless %}
+    {% endif %}
+    {% endfor %}
+  ],
+  "links": [
+    {% assign edge_list = "" %}
+    {% for note in site.notes %}
+      {% if note.links %}
+        {% for target in note.links %}
+          {% capture edge %}{{ note.slug }}|||{{ target }}{% endcapture %}
+          {% if edge_list == "" %}
+            {% assign edge_list = edge %}
+          {% else %}
+            {% assign edge_list = edge_list | append: "^^^" | append: edge %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    {% assign edges = edge_list | split: "^^^" %}
+    {% for edge in edges %}
+      {% assign parts = edge | split: "|||" %}
+      {% if parts[0] != "" %}
+      { "source": {{ parts[0] | jsonify }}, "target": {{ parts[1] | jsonify }} }{% unless forloop.last %},{% endunless %}
+      {% endif %}
+    {% endfor %}
+  ]
+}
