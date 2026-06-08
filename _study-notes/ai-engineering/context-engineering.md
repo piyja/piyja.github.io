@@ -6,7 +6,7 @@ tags: [LLM, Prompting, Agents]
 links:
   - ai-engineering
   - memory-management-agents
-group: "AI Engineering"
+category: ai-engineering
 ---
 
 ## What is Context Engineering?

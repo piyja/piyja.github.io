@@ -1,17 +1,17 @@
 ---
 ---
-{% assign all_nodes = site.notes | concat: site.posts | concat: site.study_notes %}
+{% assign all_nodes = site['study-notes'] | concat: site.posts %}
 {
   "nodes": [
     {% for item in all_nodes %}
     {% if item.slug %}
     {
-      "id": "{{ item.slug }}",
+      "id": {{ item.slug | jsonify }},
       "title": {{ item.title | jsonify }},
       "description": {{ item.description | default: "" | jsonify }},
       "url": "{{ item.url | relative_url }}",
       "tags": {{ item.tags | default: "" | jsonify }},
-      "group": {{ item.group | default: "default" | jsonify }},
+      "group": {{ item.category | default: item.group | default: "Study Notes" | jsonify }},
       "wordCount": {{ item.content | number_of_words }},
       "rawContent": {{ item.content | strip_html | jsonify }},
       "kind": "note"
@@ -45,10 +45,10 @@
   ],
   "links": [
     {% assign edge_list = "" %}
-    {% for note in site.notes %}
-      {% if note.links %}
-        {% for target in note.links %}
-          {% capture edge %}{{ note.slug }}|||{{ target }}{% endcapture %}
+    {% for item in site['study-notes'] %}
+      {% if item.slug and item.links %}
+        {% for target in item.links %}
+          {% capture edge %}{{ item.slug }}|||{{ target }}{% endcapture %}
           {% if edge_list == "" %}
             {% assign edge_list = edge %}
           {% else %}

@@ -1,5 +1,8 @@
 My blog post topics:
-  - Port study obsidian files to here 
+  - Port study obsidian files to here
+  - can you port the ML-basic as well to the study notes tabs - I would want to add all study material under it 
+  - graph for all notes + posts
+  - move review posts from aie 
 
 My ML learning track - May + June '26
 - from ML fundamentals training 

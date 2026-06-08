@@ -4,7 +4,7 @@ title: WIP Building blocks of an LLM
 date: 2026-05-21
 description: In this post, we will explore the building blocks of LLM, their basic definition and how they work together to make a LLM. 
 tags: MLSystems, LLM
-categories: [ML Basics]
+category: ml-basics
 chart:
   vega_lite: true
 giscus_comments: false

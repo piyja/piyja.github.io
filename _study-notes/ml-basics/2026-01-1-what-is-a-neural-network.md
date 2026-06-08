@@ -3,7 +3,7 @@ layout: post
 title: "What is a neuron? and a neural network?"
 date: 2026-01-01 
 description: A beginner-friendly walkthrough of how neural networks learn — from neurons and weights to forward pass and backpropagation.
-categories: [ML Basics]
+category: ml-basics
 tags: [ML, Neural Networks, Deep Learning]
 ---
 

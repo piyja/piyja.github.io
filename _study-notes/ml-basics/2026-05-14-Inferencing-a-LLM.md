@@ -4,12 +4,14 @@ title: Inferencing a LLM
 date: 2026-05-14
 description: In this post, we will explore the various techniques and strategies for optimizing inference in large language models (LLMs). We will discuss methods for reducing latency, improving throughput, and managing resource constraints during inference.
 tags: MLSystems, LLM
-categories: [ML Basics]
+category: ml-basics
 chart:
   vega_lite: true
 giscus_comments: false
 toc:
   sidebar: left
+links:
+  - 
 ---
 
 # What is inferencing a model? {#what-is-inferencing}

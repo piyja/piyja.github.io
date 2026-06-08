@@ -4,7 +4,7 @@ title: Inside Out of a LLM
 date: 2026-05-14
 description: In this post, we will explore the inner workings of LLMs and how they are designed and built. Basic concepts which build LLM will be discussed here.
 tags: MLSystems, LLM
-categories: [ML Basics]
+category: ml-basics
 chart:
   vega_lite: true
 giscus_comments: false

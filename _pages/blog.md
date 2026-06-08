@@ -21,7 +21,6 @@ knowledge_graph: true
 
 <div class="tab-nav-ml" id="blog-tabs">
   <a href="#" class="tab-link active-tab" data-tab="my-titbits">Field Notes</a>
-  <a href="#" class="tab-link" data-tab="ml-basics">ML Basics</a>
   <a href="#" class="tab-link" data-tab="study-notes">Study Notes</a>
   <a href="#" class="tab-link tab-right" data-tab="graph-view">Graph view</a>
 </div>
@@ -140,108 +139,193 @@ knowledge_graph: true
 {% if titbits_posts.size == 0 %}<p class="text-muted mt-3">No posts yet. Stay tuned!</p>{% endif %}
 </div>
 
-<!-- ML Basics Tab -->
-<div id="tab-ml-basics" class="tab-content" style="display:none;">
-{% assign ml_posts = site.posts | where_exp: "post", "post.categories contains 'ML Basics'" %}
-{% assign current_month_year = "" %}
-{% for post in ml_posts %}
-  {% assign post_month_year = post.date | date: "%B %Y" %}
-  {% if post_month_year != current_month_year %}
-    {% unless forloop.first %}</ul>{% endunless %}
-    <h4 class="mt-4 mb-2" style="border-bottom: 1px solid var(--global-divider-color); padding-bottom: 0.3rem;">
-      <i class="fa-solid fa-calendar-days fa-sm"></i> &nbsp; {{ post_month_year }}
-    </h4>
+<div id="tab-study-notes" class="tab-content" style="display:none;">
+  <div class="sub-tab-nav mb-3">
+    <button class="btn btn-sm btn-outline-primary sub-tab-link active" data-sub-tab="ml-basics">ML Basics</button>
+    <button class="btn btn-sm btn-outline-primary sub-tab-link" data-sub-tab="ai-engineering">AI Engineering</button>
+    <button class="btn btn-sm btn-outline-primary sub-tab-link" data-sub-tab="dsa">DSA</button>
+    <button class="btn btn-sm btn-outline-primary sub-tab-link" data-sub-tab="system-design">System Design</button>
+    <button class="btn btn-sm btn-outline-primary sub-tab-link" data-sub-tab="web">Web</button>
+  </div>
+
+
+  <div id="sub-tab-ai-engineering" class="sub-tab-content" style="display:none;">
+    {% assign ai_notes = site['study-notes'] | where: "category", "ai-engineering" %}
+    {% if ai_notes.size > 0 %}
     <ul class="post-list">
-    {% assign current_month_year = post_month_year %}
-  {% endif %}
-  {% if post.external_source == blank %}
-    {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
-  {% else %}
-    {% assign read_time = post.feed_content | strip_html | number_of_words | divided_by: 180 | plus: 1 %}
-  {% endif %}
-  {% assign year = post.date | date: "%Y" %}
-  {% assign tags = post.tags | join: "" %}
-  {% assign categories = post.categories | join: "" %}
-  <li>
-    {% if post.thumbnail %}<div class="row"><div class="col-sm-9">{% endif %}
-    <h3>
-      {% if post.redirect == blank %}
-        <a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      {% elsif post.redirect contains '://' %}
-        <a class="post-title" href="{{ post.redirect }}" target="_blank">{{ post.title }}</a>
-        <svg width="2rem" height="2rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-      {% else %}
-        <a class="post-title" href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
-      {% endif %}
-    </h3>
-    <p>{{ post.description }}</p>
-    <p class="post-meta">
-      {{ read_time }} min read &nbsp; &middot; &nbsp;
-      {{ post.date | date: '%B %d, %Y' }}
-      {% if post.external_source %}&nbsp; &middot; &nbsp; {{ post.external_source }}{% endif %}
-    </p>
-    <p class="post-tags">
-      <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}">
-        <i class="fa-solid fa-calendar fa-sm"></i> {{ year }}
-      </a>
-      {% if tags != "" %}
-        &nbsp; &middot; &nbsp;
-        {% for tag in post.tags %}
-          <a href="{{ tag | slugify | prepend: '/blog/tag/' | prepend: site.baseurl}}">
-            <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}</a> &nbsp;
-        {% endfor %}
-      {% endif %}
-      {% if categories != "" %}
-        &nbsp; &middot; &nbsp;
-        {% for category in post.categories %}
-          <a href="{{ category | slugify | prepend: '/blog/category/' | prepend: site.baseurl}}">
-            <i class="fa-solid fa-tag fa-sm"></i> {{ category }}</a> &nbsp;
-        {% endfor %}
-      {% endif %}
-    </p>
-    {% if post.thumbnail %}
-      </div>
-      <div class="col-sm-3">
-        <img class="card-img" src="{{post.thumbnail | relative_url}}" style="object-fit: cover; height: 90%" alt="image">
-      </div>
-    </div>
+    {% for note in ai_notes %}
+      {% assign read_time = note.content | number_of_words | divided_by: 180 | plus: 1 %}
+      <li>
+        {% if note.thumbnail %}<div class="row"><div class="col-sm-9">{% endif %}
+        <h3><a class="post-title" href="{{ note.url | relative_url }}">{{ note.title | default: note.slug | replace: '-', ' ' | capitalize }}</a></h3>
+        {% if note.description %}<p>{{ note.description }}</p>{% endif %}
+        <p class="post-meta">
+          {{ read_time }} min read
+          {% if note.tags %}
+            &nbsp; &middot; &nbsp;
+            {% for tag in note.tags %}
+              <span style="font-size:0.8rem; color:var(--global-text-color-light);">#{{ tag }}</span> &nbsp;
+            {% endfor %}
+          {% endif %}
+        </p>
+        {% if note.thumbnail %}
+          </div>
+          <div class="col-sm-3">
+            <img class="card-img" src="{{note.thumbnail | relative_url}}" style="object-fit: cover; height: 90%" alt="image">
+          </div>
+        </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+    {% else %}
     {% endif %}
-  </li>
-{% endfor %}
-{% if ml_posts.size > 0 %}</ul>{% endif %}
-{% if ml_posts.size == 0 %}<p class="text-muted mt-3">No posts yet. Stay tuned!</p>{% endif %}
+  </div>
+
+  <div id="sub-tab-ml-basics" class="sub-tab-content">
+    {% assign ml_study_posts = site['study-notes'] | where: "category", "ml-basics" %}
+    {% if ml_study_posts.size > 0 %}
+    <ul class="post-list">
+    {% for post in ml_study_posts %}
+      {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
+      <li>
+        <h3><a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        {% if post.description %}<p>{{ post.description }}</p>{% endif %}
+        <p class="post-meta">
+          {{ read_time }} min read &nbsp; &middot; &nbsp; {{ post.date | date: '%B %d, %Y' }}
+          {% if post.tags %}
+            &nbsp; &middot; &nbsp;
+            {% for tag in post.tags %}
+              <span style="font-size:0.8rem; color:var(--global-text-color-light);">#{{ tag }}</span> &nbsp;
+            {% endfor %}
+          {% endif %}
+        </p>
+      </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-muted mt-3">No ML Basics posts yet.</p>
+    {% endif %}
+  </div>
+
+  <div id="sub-tab-dsa" class="sub-tab-content" style="display:none;">
+    {% assign dsa_notes = site['study-notes'] | where: "category", "dsa" %}
+    {% if dsa_notes.size > 0 %}
+    <ul class="post-list">
+    {% for note in dsa_notes %}
+      {% assign read_time = note.content | number_of_words | divided_by: 180 | plus: 1 %}
+      <li>
+        {% if note.thumbnail %}<div class="row"><div class="col-sm-9">{% endif %}
+        <h3><a class="post-title" href="{{ note.url | relative_url }}">{{ note.title | default: note.slug | replace: '-', ' ' | capitalize }}</a></h3>
+        {% if note.description %}<p>{{ note.description }}</p>{% endif %}
+        <p class="post-meta">
+          {{ read_time }} min read
+          {% if note.tags %}
+            &nbsp; &middot; &nbsp;
+            {% for tag in note.tags %}
+              <span style="font-size:0.8rem; color:var(--global-text-color-light);">#{{ tag }}</span> &nbsp;
+            {% endfor %}
+          {% endif %}
+        </p>
+        {% if note.thumbnail %}
+          </div>
+          <div class="col-sm-3">
+            <img class="card-img" src="{{note.thumbnail | relative_url}}" style="object-fit: cover; height: 90%" alt="image">
+          </div>
+        </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-danger">DEBUG: DSA notes count is 0 for category "DSA"</p>
+    {% endif %}
+  </div>
+
+  <div id="sub-tab-system-design" class="sub-tab-content" style="display:none;">
+    {% assign sd_notes = site['study-notes'] | where: "category", "system-design" %}
+    {% if sd_notes.size > 0 %}
+    <ul class="post-list">
+    {% for note in sd_notes %}
+      {% assign read_time = note.content | number_of_words | divided_by: 180 | plus: 1 %}
+      <li>
+        {% if note.thumbnail %}<div class="row"><div class="col-sm-9">{% endif %}
+        <h3><a class="post-title" href="{{ note.url | relative_url }}">{{ note.title | default: note.slug | replace: '-', ' ' | capitalize }}</a></h3>
+        {% if note.description %}<p>{{ note.description }}</p>{% endif %}
+        <p class="post-meta">
+          {{ read_time }} min read
+          {% if note.tags %}
+            &nbsp; &middot; &nbsp;
+            {% for tag in note.tags %}
+              <span style="font-size:0.8rem; color:var(--global-text-color-light);">#{{ tag }}</span> &nbsp;
+            {% endfor %}
+          {% endif %}
+        </p>
+        {% if note.thumbnail %}
+          </div>
+          <div class="col-sm-3">
+            <img class="card-img" src="{{note.thumbnail | relative_url}}" style="object-fit: cover; height: 90%" alt="image">
+          </div>
+        </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-danger">DEBUG: SD notes count is 0 for category "System Design"</p>
+    {% endif %}
+  </div>
+
+  <div id="sub-tab-web" class="sub-tab-content" style="display:none;">
+    {% assign web_notes = site['study-notes'] | where: "category", "web" %}
+    {% if web_notes.size > 0 %}
+    <ul class="post-list">
+    {% for note in web_notes %}
+      {% assign read_time = note.content | number_of_words | divided_by: 180 | plus: 1 %}
+      <li>
+        {% if note.thumbnail %}<div class="row"><div class="col-sm-9">{% endif %}
+        <h3><a class="post-title" href="{{ note.url | relative_url }}">{{ note.title | default: note.slug | replace: '-', ' ' | capitalize }}</a></h3>
+        {% if note.description %}<p>{{ note.description }}</p>{% endif %}
+        <p class="post-meta">
+          {{ read_time }} min read
+          {% if note.tags %}
+            &nbsp; &middot; &nbsp;
+            {% for tag in note.tags %}
+              <span style="font-size:0.8rem; color:var(--global-text-color-light);">#{{ tag }}</span> &nbsp;
+            {% endfor %}
+          {% endif %}
+        </p>
+        {% if note.thumbnail %}
+          </div>
+          <div class="col-sm-3">
+            <img class="card-img" src="{{note.thumbnail | relative_url}}" style="object-fit: cover; height: 90%" alt="image">
+          </div>
+        </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-danger">DEBUG: Web notes count is 0 for category "Web"</p>
+    {% endif %}
+  </div>
 </div>
 
-<!-- Study Notes Tab -->
-<div id="tab-study-notes" class="tab-content" style="display:none;">
-{% assign study_by_category = site.study_notes | group_by: "category" %}
-{% for group in study_by_category %}
-  <h4 class="mt-4 mb-2" style="border-bottom: 1px solid var(--global-divider-color); padding-bottom: 0.3rem;">
-    <i class="fa-solid fa-folder-open fa-sm"></i> &nbsp; {{ group.name | default: "General" }}
-  </h4>
-  <ul class="post-list">
-  {% for note in group.items %}
-    {% assign read_time = note.content | number_of_words | divided_by: 180 | plus: 1 %}
-    <li>
-      <h3><a class="post-title" href="{{ note.url | relative_url }}">{{ note.title }}</a></h3>
-      {% if note.description %}<p>{{ note.description }}</p>{% endif %}
-      <p class="post-meta">
-        {{ read_time }} min read
-        {% if note.tags %}
-          &nbsp; &middot; &nbsp;
-          {% for tag in note.tags %}
-            <span style="font-size:0.8rem; color:var(--global-text-color-light);">#{{ tag }}</span> &nbsp;
-          {% endfor %}
-        {% endif %}
-      </p>
-    </li>
-  {% endfor %}
-  </ul>
-{% endfor %}
-{% if site.study_notes.size == 0 %}<p class="text-muted mt-3">No study notes yet.</p>{% endif %}
-</div>
+<script>
+(function() {
+  var subTabs = document.querySelectorAll('.sub-tab-link');
+  subTabs.forEach(function(tab) {
+    tab.addEventListener('click', function(e) {
+      e.preventDefault();
+      subTabs.forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.sub-tab-content').forEach(function(c) { c.style.display = 'none'; });
+      tab.classList.add('active');
+      var target = document.getElementById('sub-tab-' + tab.dataset.subTab);
+      if (target) target.style.display = 'block';
+    });
+  });
+})();
+</script>
 
 <!-- Graph View Tab -->
 <div id="tab-graph-view" class="tab-content" style="display:none;">

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Thinking as a PM (product) + SWE - Personal reflections
+title: Thinking as a PM (product) + SWE (Product Engineering)- Personal reflections
 date: 2026-05-18
 description: In this post, I share my personal reflections on my journey as a design engineer and software engineer, and how I approach problems, think abstractly, and plan for the future.
 tags: Thoughts

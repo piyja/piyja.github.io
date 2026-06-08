@@ -18,7 +18,7 @@ layout: default
       <div class="note-links mt-1 mb-3">
         <small><strong>Connected notes:</strong>
           {% for link_slug in page.links %}
-            {% assign linked_note = site.notes | where: "slug", link_slug | first %}
+            {% assign linked_note = site['study-notes'] | where: "slug", link_slug | first %}
             {% if linked_note %}
               <a href="{{ linked_note.url | relative_url }}">{{ linked_note.title }}</a>{% unless forloop.last %}, {% endunless %}
             {% endif %}
@@ -27,7 +27,7 @@ layout: default
       </div>
     {% endif %}
     <p class="post-meta">
-      <a href="{{ '/graph/' | relative_url }}">← Back to graph</a>
+      <a href="{{ '/blog/' | relative_url }}">← Back to blog</a>
     </p>
   </header>
   <article class="post-content">

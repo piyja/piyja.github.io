@@ -10,6 +10,9 @@ chart:
 giscus_comments: false
 toc:
   sidebar: left
+links:
+  - context-engineering
+  - coding-agents-workflow
 ---
 
 ## About the article - [How to Build In-Vehicle AI Agents with NVIDIA: From Cloud to Car](https://developer.nvidia.com/blog/how-to-build-in-vehicle-ai-agents-with-nvidia-from-cloud-to-car/) {#about}

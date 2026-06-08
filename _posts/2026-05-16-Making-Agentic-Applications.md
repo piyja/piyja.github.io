@@ -10,6 +10,10 @@ chart:
 giscus_comments: false
 toc:
   sidebar: left
+links:
+  - context-engineering
+  - ai-engineering
+  - coding-agents-workflow
 ---
 
 # What are agentic applications? {#what-are-agentic-apps}
