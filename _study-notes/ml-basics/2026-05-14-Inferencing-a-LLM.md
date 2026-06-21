@@ -10,8 +10,6 @@ chart:
 giscus_comments: false
 toc:
   sidebar: left
-links:
-  - 
 ---
 
 # What is inferencing a model? {#what-is-inferencing}

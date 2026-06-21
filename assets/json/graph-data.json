@@ -60,7 +60,7 @@
     {% assign edges = edge_list | split: "^^^" %}
     {% for edge in edges %}
       {% assign parts = edge | split: "|||" %}
-      {% if parts[0] != "" %}
+      {% if parts[0] != "" and parts[1] != "" %}
       { "source": {{ parts[0] | jsonify }}, "target": {{ parts[1] | jsonify }} }{% unless forloop.last %},{% endunless %}
       {% endif %}
     {% endfor %}
