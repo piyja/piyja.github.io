@@ -1,16 +1,22 @@
 ---
+layout: post
 title: "Review: PhD Thesis — Dr Ilias Trommer"
 slug: phd-thesis-ilias-trommer
 description: "Notes from reading Dr. Ilias Trommer's PhD thesis on efficient neural network inference"
 tags: [MLSystems, LLM]
+categories: [Field Notes]
 links:
   - ai-engineering
 category: ai-engineering
 ---
 
-On the quest of learning about machine learning at the edge — from building and optimizing models to tuning data pipelines and the infrastructure around them — I came across Dr. Trommer's talk at an event in Berlin. It sparked enough interest to follow up, and along with some references, he suggested reading his thesis to get a grounded understanding of fundamental optimization techniques for model training and inference. I'll admit that some sections were not easy reads, but in the interest of time I focused on understanding the main arguments and conclusions rather than working through every mathematical derivation.
+On the quest of learning about machine learning at the edge — from building and optimizing models to tuning data pipelines and the infrastructure around them — I came across Dr. Trommer's talk at an event in Berlin. 
+It sparked enough interest to follow up, and along with some references, he suggested reading his thesis to get a grounded understanding of fundamental optimization techniques for model training and inference. 
+I'll admit that some sections were not easy reads, but in the interest of time I focused on understanding the main arguments and conclusions rather than working through every mathematical derivation.
 
-The thesis covers techniques for optimizing neural networks to run on edge devices. The central constraint at the edge is power — tokens per watt is the metric that matters, not raw throughput. Dr Trommer's argument is that models can be optimized through quantization (both during training and post-training at inference time), and that quantization-aware training in particular yields meaningful gains. A key premise throughout is that training and inference should not be designed in isolation — thinking about them jointly produces better outcomes when deploying on embedded hardware.
+The thesis covers techniques for optimizing neural networks to run on edge devices. The central constraint at the edge is power — tokens per watt is the metric that matters, not raw throughput. 
+Dr Trommer's argument is that models can be optimized through quantization (both during training and post-training at inference time), and that quantization-aware training in particular yields meaningful gains. 
+A key premise throughout is that training and inference should not be designed in isolation — thinking about them jointly produces better outcomes when deploying on embedded hardware.
 
 ---
 
@@ -57,4 +63,6 @@ The thesis covers techniques for optimizing neural networks to run on edge devic
 
 ---
 
-Dr Trommer is notably clear-eyed about the scope and limitations of the work — he explicitly identifies which perspectives are missing and what the study does not measure, with energy consumption being the primary axis of evaluation throughout. The thesis offers a coherent set of insights into how model training and inference can be co-optimized by targeting the most fundamental operation a processor performs: multiplication. The parallel thread on sparse parameter representation and memory-efficient encoding adds another practical dimension, showing how the structural properties of trained weights can themselves be leveraged to reduce the cost of running models on constrained hardware. Taken together, it is a focused and technically honest contribution to the problem of deploying capable models at the edge.
+Dr Trommer is notably clear-eyed about the scope and limitations of the work — he explicitly identifies which perspectives are missing and what the study does not measure, with energy consumption being the primary axis of evaluation throughout. 
+The thesis offers a coherent set of insights into how model training and inference can be co-optimized by targeting the most fundamental operation a processor performs: multiplication. 
+The parallel thread on sparse parameter representation and memory-efficient encoding adds another practical dimension, showing how the structural properties of trained weights can themselves be leveraged to reduce the cost of running models on constrained hardware. Taken together, it is a focused and technically honest contribution to the problem of deploying capable models at the edge.
