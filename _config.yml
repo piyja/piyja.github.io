@@ -231,6 +231,11 @@ plugins:
 defaults:
   - scope:
       path: ""
+      type: posts
+    values:
+      related_posts: false
+  - scope:
+      path: ""
       type: "study-notes"
     values:
       layout: post
