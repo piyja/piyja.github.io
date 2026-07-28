@@ -107,6 +107,13 @@ div.list-group {
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 2rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+table.list-group-table {
+  width: 100%;
+  table-layout: fixed;
 }
 
 td.list-group-category {
@@ -123,6 +130,9 @@ td.list-group-category-icon {
 
 td.list-group-name {
   font-size: 0.8rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 td.list-group-level {
