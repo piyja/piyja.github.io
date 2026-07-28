@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "We Are Developers 2026 — Trip Report"
-date: 2026-09-07
+date: 2026-07-10
 slug: we-are-developers-2026-trip-report
 description: "A trip report from We Are Developers 2026 in Berlin — workshops, talks, booth visits, and key takeaways on Edge AI, inference optimisation, and the agentic wave."
 tags: [Edge AI, Agents, Inference, Conferences]
