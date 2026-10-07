@@ -1,0 +1,26 @@
+<section class="pf-section" id="pf-education" data-pf-section="education">
+  <div class="pf-section__head">
+    <span class="pf-section__num">04</span>
+    <h2 class="pf-section__title">Education</h2>
+  </div>
+
+  <div class="pf-edu">
+    {% for item in items %}
+      <div class="pf-edurow pf-reveal">
+        <div class="pf-edurow__main">
+          <h3 class="pf-edurow__degree">
+            {% if item.url %}<a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.institution }}</a>{% else %}{{ item.institution }}{% endif %}
+          </h3>
+          <p class="pf-edurow__area">{{ item.area }}</p>
+          <p class="pf-edurow__meta">{{ item.degree }}{% if item.location %} &middot; {{ item.location }}{% endif %}</p>
+          <p class="pf-edurow__detail">{{ item.detail }}</p>
+        </div>
+        <p class="pf-edurow__dates">{{ item.start }} &ndash; {{ item.end }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <footer class="pf-foot">
+    <p>Built with Jekyll. No trackers beyond the one your analytics tool needs.</p>
+  </footer>
+</section>

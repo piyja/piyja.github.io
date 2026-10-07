@@ -1,0 +1,58 @@
+<section class="pf-section" id="pf-projects" data-pf-section="projects">
+  <div class="pf-section__head">
+    <span class="pf-section__num">02</span>
+    <h2 class="pf-section__title">Projects</h2>
+  </div>
+
+  <ul class="pf-filters" id="pf-filters" role="group" aria-label="Filter projects by tag">
+    <li>
+      <button class="pf-filter pf-is-active" type="button" data-pf-filter="all" aria-pressed="true">All</button>
+    </li>
+    {% assign seen = "" | split: "" %}
+    {% for project in items %}
+      {% for tag in project.tags %}
+        {% unless seen contains tag %}
+          {% assign seen = seen | push: tag %}
+          <li>
+            <button class="pf-filter" type="button" data-pf-filter="{{ tag | slugify }}" aria-pressed="false">{{ tag }}</button>
+          </li>
+        {% endunless %}
+      {% endfor %}
+    {% endfor %}
+  </ul>
+
+  <div class="pf-projects" id="pf-projects-grid">
+    {% for project in items %}
+      <article class="pf-project pf-reveal" data-pf-tags="{% for tag in project.tags %}{{ tag | slugify }} {% endfor %}">
+        <div class="pf-project__top">
+          <h3 class="pf-project__title">
+            {% if project.url %}<a href="{{ project.url | relative_url }}">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}
+          </h3>
+          <span class="pf-project__year">{{ project.year }}</span>
+        </div>
+
+        <p class="pf-project__blurb">{{ project.blurb }}</p>
+        <p class="pf-project__detail">{{ project.detail }}</p>
+
+        <ul class="pf-tags">
+          {% for tag in project.tags %}
+            <li class="pf-tag">{{ tag }}</li>
+          {% endfor %}
+        </ul>
+
+        <div class="pf-project__links">
+          {% if project.url %}
+            <a class="pf-project__link" href="{{ project.url | relative_url }}">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>Visit
+            </a>
+          {% endif %}
+          {% if project.repo %}
+            <a class="pf-project__link" href="{{ project.repo }}" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-github"></i>Source
+            </a>
+          {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>

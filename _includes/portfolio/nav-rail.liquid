@@ -1,0 +1,12 @@
+<nav class="pf-rail" id="pf-rail" aria-label="Portfolio sections">
+  <ul class="pf-rail__list">
+    {% for section in sections %}
+      <li class="pf-rail__item">
+        <a class="pf-rail__link" href="#pf-{{ section.id }}" data-pf-nav="{{ section.id }}">
+          <span class="pf-rail__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <span class="pf-rail__label">{{ section.label }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

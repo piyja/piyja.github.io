@@ -1,0 +1,27 @@
+<header class="pf-hero" id="pf-top">
+  <p class="pf-hero__eyebrow">{{ profile.availability }}</p>
+  <h1 class="pf-hero__name">{{ profile.name }}</h1>
+  <p class="pf-hero__title">{{ profile.title }}</p>
+  <p class="pf-hero__tagline">{{ profile.tagline }}</p>
+  <p class="pf-hero__summary">{{ profile.summary }}</p>
+
+  <div class="pf-hero__meta">
+    {% if profile.location %}
+      <span class="pf-hero__location"><i class="fa-solid fa-location-dot"></i>{{ profile.location }}</span>
+    {% endif %}
+  </div>
+
+  <ul class="pf-hero__links">
+    {% for link in profile.links %}
+      <li>
+        <a class="pf-btn" href="{{ link.href | relative_url }}" {% if link.href contains '://' %}target="_blank" rel="noopener noreferrer"{% endif %}>
+          <i class="{{ link.icon }}"></i><span>{{ link.label }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a class="pf-scroll-cue" href="#pf-experience" aria-label="Scroll to content">
+    <i class="fa-solid fa-chevron-down"></i>
+  </a>
+</header>

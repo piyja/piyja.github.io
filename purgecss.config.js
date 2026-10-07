@@ -4,6 +4,14 @@ module.exports = {
   output: "_site/assets/css/",
   skippedContentGlobs: ["_site/assets/**/*.html"],
   safelist: {
-    standard: [/^graph-/, /^kg-/, "note-panel", "open", "note-panel-header", "note-panel-footer"],
+    standard: [
+      /^graph-/,
+      /^kg-/,
+      /^pf-/,
+      "note-panel",
+      "open",
+      "note-panel-header",
+      "note-panel-footer",
+    ],
   },
 };

@@ -1,0 +1,19 @@
+<section class="pf-section" id="pf-skills" data-pf-section="skills">
+  <div class="pf-section__head">
+    <span class="pf-section__num">03</span>
+    <h2 class="pf-section__title">Skills</h2>
+  </div>
+
+  <div class="pf-skills">
+    {% for group in groups %}
+      <div class="pf-skillgroup pf-reveal">
+        <h3 class="pf-skillgroup__title">{{ group.group }}</h3>
+        <ul class="pf-skillgroup__items">
+          {% for item in group.items %}
+            <li class="pf-tag pf-tag--solid">{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+</section>

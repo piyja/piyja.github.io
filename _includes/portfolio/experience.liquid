@@ -1,0 +1,50 @@
+<section class="pf-section" id="pf-experience" data-pf-section="experience">
+  <div class="pf-section__head">
+    <span class="pf-section__num">01</span>
+    <h2 class="pf-section__title">Experience</h2>
+  </div>
+
+  <ol class="pf-timeline">
+    {% for job in items %}
+      <li class="pf-job pf-reveal">
+        <div class="pf-job__header">
+          <div class="pf-job__heading">
+            <h3 class="pf-job__role">
+              {% if job.url %}<a href="{{ job.url }}" target="_blank" rel="noopener noreferrer">{{ job.role }}</a>{% else %}{{ job.role }}{% endif %}
+            </h3>
+            <p class="pf-job__company">
+              {% if job.url %}<a href="{{ job.url }}" target="_blank" rel="noopener noreferrer">{{ job.company }}</a>{% else %}{{ job.company }}{% endif %}
+              {% if job.location %}<span class="pf-job__loc">{{ job.location }}</span>{% endif %}
+            </p>
+          </div>
+          <p class="pf-job__dates">
+            {{ job.start }} &ndash; {{ job.end }}
+            {% if job.current %}<span class="pf-badge">current</span>{% endif %}
+          </p>
+        </div>
+
+        <p class="pf-job__summary">{{ job.summary }}</p>
+
+        <button class="pf-toggle" type="button" data-pf-toggle aria-expanded="false" aria-controls="pf-job-{{ forloop.index }}">
+          <span class="pf-toggle__text">Details</span>
+          <i class="fa-solid fa-chevron-down pf-toggle__icon"></i>
+        </button>
+
+        <div class="pf-job__body" id="pf-job-{{ forloop.index }}" data-pf-collapse hidden>
+          <ul class="pf-highlights">
+            {% for point in job.highlights %}
+              <li>{{ point }}</li>
+            {% endfor %}
+          </ul>
+          {% if job.stack and job.stack.size > 0 %}
+            <ul class="pf-tags">
+              {% for tech in job.stack %}
+                <li class="pf-tag">{{ tech }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ol>
+</section>

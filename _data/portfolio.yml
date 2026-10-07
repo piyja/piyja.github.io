@@ -1,0 +1,168 @@
+# Portfolio page content.
+# Rendered by _layouts/portfolio.liquid + _includes/portfolio/*.liquid
+# All classes toggled by assets/js/portfolio.js are prefixed `pf-` and
+# safelisted in purgecss.config.js — keep that convention.
+
+profile:
+  name: "Piyush D Jadhav"
+  title: "Expert Software Engineer"
+  tagline: "Embedded systems and edge AI, at the point where they meet."
+  summary: >-
+    I build software that has to behave predictably on hardware with real
+    constraints. At MBition I work on the "Hey Mercedes" in-cabin assistant —
+    the seam between embedded C++ and aggressively optimised edge models. Before
+    that, consumer hardware at Dyson, and a Design Engineering degree from IIT
+    Madras that taught me to see the whole system, not just my slice of it.
+  location: "Berlin, Germany"
+  availability: "Open to interesting problems"
+  links:
+    - label: "Email"
+      href: "mailto:piyushjadhav13@gmail.com"
+      icon: "fa-solid fa-envelope"
+    - label: "LinkedIn"
+      href: "https://www.linkedin.com/in/piyushdjadhav/"
+      icon: "fa-brands fa-linkedin-in"
+    - label: "GitHub"
+      href: "https://github.com/piyja"
+      icon: "fa-brands fa-github"
+    - label: "Blog"
+      href: "/blog/"
+      icon: "fa-solid fa-arrow-up-right-from-square"
+
+# Rendered in order, numbered 01..N, and mirrored in the left nav rail.
+sections:
+  - id: "experience"
+    label: "Experience"
+  - id: "projects"
+    label: "Projects"
+  - id: "skills"
+    label: "Skills"
+  - id: "education"
+    label: "Education"
+
+experience:
+  - company: "MBition GmbH"
+    url: "https://www.mbition.io"
+    role: "Expert Software Engineer"
+    location: "Berlin, Germany"
+    start: "Nov 2021"
+    end: "Present"
+    current: true
+    summary: >-
+      Building the next generation of the "Hey Mercedes" in-cabin virtual
+      assistant, at the intersection of embedded systems and highly optimised
+      edge-AI models.
+    highlights:
+      - "Own the software architecture for in-cabin assistant features, spanning embedded Linux targets through to the in-vehicle backend."
+      - "Optimise edge-AI models for constrained automotive hardware — latency and memory budgets are a hard part of the problem, not a nice-to-have."
+      - "Develop and deploy agentic AI systems, moving beyond command-response models toward agents that anticipate user needs."
+      - "Bridge product and implementation: translate ambiguous user requirements into concrete technical tradeoffs the team can act on."
+    stack:
+      - "C++20"
+      - "Embedded Linux"
+      - "Edge AI"
+      - "Automotive"
+      - "System Architecture"
+
+  - company: "Dyson Technologies"
+    url: "https://www.dyson.com"
+    role: "Senior Software Engineer"
+    location: "Bristol, UK"
+    start: "Nov 2019"
+    end: "Nov 2021"
+    current: false
+    summary: >-
+      Software development across multiple smart consumer electronics products.
+    highlights:
+      - "Shipped software for multiple smart consumer electronics products, from feature implementation through to production support."
+      - "Built an on-off target testing platform that connected business logic expressed in human language directly to the software code implementing it."
+    stack:
+      - "C++"
+      - "Python"
+      - "Testing Infrastructure"
+      - "Consumer Hardware"
+
+projects:
+  - title: "embeddedGraph"
+    blurb: "Graph-based orchestration for embedded and edge systems — deterministic where it counts, agentic where it helps."
+    detail: >-
+      LangGraph popularised orchestration graphs for LLM agents, but it has no
+      embedded story: no state machines, no safety primitives, no deterministic
+      fallback. embeddedGraph is a C++20, zero-dependency framework that fills
+      that gap. A statechart-based Hierarchical State Machine provides the
+      deterministic behavioral contract, and a LangGraph-inspired execution
+      graph runs inside each state. When the HSM enters SAFE_HALT all graph
+      execution stops; when it enters DEGRADED only rule-based graphs run. That
+      separation is what makes an embedded system certifiable — and it works
+      just as well for non-AI applications like sensor pipelines, control loops
+      and protocol handlers.
+    url: "https://github.com/piyja/embeddedGraph"
+    repo: "https://github.com/piyja/embeddedGraph"
+    year: "2026"
+    featured: true
+    tags:
+      - "C++20"
+      - "HSM"
+      - "Embedded"
+      - "AI Agents"
+      - "Zero-Dependency"
+
+  - title: "piyja.github.io"
+    blurb: "This site — a Jekyll knowledge graph that links every note, post and study document together."
+    detail: >-
+      A personal site built on the al-folio theme and extended well past its
+      original scope. It merges three separate content collections — notes,
+      blog posts and study documents — into a single force-directed knowledge
+      graph at build time, then resolves wiki-links at runtime to wire in
+      relationships nobody declared. Clicking any node pulls the rendered page
+      and opens it in a side panel without leaving the graph.
+    url: "/"
+    repo: "https://github.com/piyja/piyja.github.io"
+    year: "2026"
+    featured: true
+    tags:
+      - "Jekyll"
+      - "Liquid"
+      - "D3.js"
+      - "Graph Viz"
+
+skills:
+  - group: "Languages"
+    items:
+      - "C++14/17/20"
+      - "Python"
+      - "JavaScript"
+      - "Go"
+  - group: "Systems"
+    items:
+      - "Embedded Linux"
+      - "RTOS"
+      - "Memory & Latency Optimisation"
+      - "Static Allocation"
+      - "UML Statecharts"
+  - group: "AI / ML"
+    items:
+      - "Edge AI Inference"
+      - "Model Quantisation"
+      - "Agentic Systems"
+      - "Knowledge Graphs"
+  - group: "Practice"
+    items:
+      - "Software Architecture"
+      - "Test Infrastructure"
+      - "Technical Writing"
+      - "Design for Manufacture"
+
+education:
+  - institution: "Indian Institute of Technology Madras"
+    url: "https://www.iitm.ac.in/"
+    area: "Engineering Design — Product Development"
+    degree: "B. Tech + M. Tech"
+    location: "Chennai, India"
+    start: "2011"
+    end: "2016"
+    detail: >-
+      Electronics and Computer Science, with coursework in product development
+      labs and automotive engineering. A design degree, which is why I keep
+      asking what the constraint in front of me actually is before reaching for
+      an abstraction.

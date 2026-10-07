@@ -1,0 +1,22 @@
+---
+layout: default
+---
+{% assign p = site.data.portfolio %}
+
+<div class="pf-page" data-portfolio>
+  <!-- Cursor-tracked radial spotlight. Pointer-events none, purely decorative. -->
+  <div class="pf-spotlight" aria-hidden="true"></div>
+
+  {% include portfolio/hero.liquid profile=p %}
+
+  <div class="pf-body">
+    {% include portfolio/nav-rail.liquid sections=p.sections %}
+
+    <main class="pf-content" id="pf-content">
+      {% include portfolio/experience.liquid items=p.experience %}
+      {% include portfolio/projects.liquid items=p.projects %}
+      {% include portfolio/skills.liquid groups=p.skills %}
+      {% include portfolio/education.liquid items=p.education %}
+    </main>
+  </div>
+</div>
