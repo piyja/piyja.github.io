@@ -1,7 +1,9 @@
 ---
 layout: post
 title: Reflections from the study break
-date: 2026-10-07
+header_image: /assets/img/illustrations/doodle_oct.png
+header_image_alt: 
+date: 2026-10-27
 description: "Describe reflections and insights gained during the study break"
 tags: [embedded]
 categories: [Field Notes]
@@ -28,7 +30,7 @@ I planned to study topics such as machine learning and its applications in physi
 
 Alas after three weeks of learning and practing the labs and projects I completed the Andrew Ng Machine learning Specilization course on Deeplearning.ai. I had taken a course in 2017 by Andreaw Ng, and hence this was a good entry point for revising the ML concepts and gain superior understanding into the model building with TensorFlow. 
 
-![Machine Learning Specialization certificate](/assets/ML_Specialization.png)
+<img src="/assets/img/posts/ML_Specialization.png" alt="Machine Learning Specialization certificate" class="certificate-image" width="640" height="480">
 
 Next, I signed up for a deep learning course, with a focus on building more complex neural networks and understanding transformers. I have also been exploring the skills needed for Physical AI development.
 

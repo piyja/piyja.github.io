@@ -21,6 +21,33 @@ $max-content-width: {{ site.max_width }};
   "font-awesome/regular"
 ;
 
+.post-header-image {
+  margin: 0 0 1.5rem;
+
+  img {
+    display: block;
+    width: 25%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+  }
+}
+
+.post-content .certificate-image {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  margin: 1.5rem auto;
+}
+
+@media (max-width: 576px) {
+  .post-header-image img {
+    width: 50%;
+  }
+}
+
 // Blog Tab Navigation
 .tab-nav-ml {
   display: flex;
